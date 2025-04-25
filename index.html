@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Untuk Halyza</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: #f9f9f9;
+      color: #333;
+      overflow-x: hidden;
+    }
+
+    header {
+      text-align: center;
+      padding: 50px 20px;
+      color: white;
+      background: linear-gradient(to right, #ff6f91, #ff9a9e);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      transition: all 0.3s ease;
+    }
+
+    header h1 {
+      font-size: 3em;
+      margin: 0;
+      animation: fadeIn 1s ease-in-out;
+    }
+
+    header p {
+      font-size: 1.2em;
+      margin-top: 10px;
+      animation: fadeIn 1.5s ease-in-out;
+    }
+
+    section {
+      padding: 40px 20px;
+      max-width: 1000px;
+      margin: auto;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.5s ease-in-out;
+    }
+
+    section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 15px;
+    }
+
+    .gallery img {
+      width: 100%;
+      border-radius: 12px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .gallery img:hover {
+      transform: scale(1.1);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    }
+
+    .message-box {
+      background: white;
+      border-radius: 15px;
+      padding: 30px;
+      box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+      animation: fadeIn 1.5s ease-in-out;
+    }
+
+    .timeline {
+      margin-top: 30px;
+    }
+
+    .timeline-item {
+      background: #fff;
+      border-left: 5px solid #ff6f91;
+      padding: 15px 20px;
+      margin: 10px 0;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      animation: fadeIn 1.5s ease-in-out;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      background: #ff6f91;
+      color: white;
+      font-size: 1em;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+    }
+
+    footer i {
+      font-size: 1.5em;
+    }
+
+    /* Animasi penyambut */
+    .welcome-screen {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(to right, #ff9a9e, #fad0c4);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 2000;
+      animation: fadeOut 1s ease-in-out 3s forwards;
+    }
+
+    .welcome-screen h1 {
+      font-size: 3em;
+      color: white;
+      text-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    @keyframes fadeOut {
+      to {
+        opacity: 0;
+        visibility: hidden;
+      }
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Pop-Up Box */
+    .popup {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 3000;
+    }
+
+    .popup-content {
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      text-align: center;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .popup-content button {
+      margin: 10px;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 1em;
+    }
+
+    .popup-content button:first-child {
+      background: #ff6f91;
+      color: white;
+    }
+
+    .popup-content button:last-child {
+      background: #ccc;
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+  <!-- Background Audio -->
+  <audio id="bgMusic" loop>
+    <source src="musik.mp3" type="audio/mp3">
+    Browser kamu tidak mendukung audio 😢
+  </audio>
+
+  <!-- Pop-Up Box -->
+  <div id="musicPopup" class="popup">
+    <div class="popup-content">
+      <p>Apakah kamu ingin memutar musik latar?</p>
+      <button onclick="playMusic()">🎵 Ya</button>
+      <button onclick="closePopup()">❌ Tidak</button>
+    </div>
+  </div>
+
+  <!-- Animasi penyambut -->
+  <div class="welcome-screen">
+    <h1>Hai Sayangku Halyza ❤️</h1>
+  </div>
+
+  <header>
+    <h1>Untuk Halyza</h1>
+    <p>Terima kasih untuk hampir 3 tahun yang indah ❤️</p>
+  </header>
+
+  <div class="parallax"></div>
+
+  <section>
+    <h2>📸 Galeri Kenangan</h2>
+    <div class="gallery">
+      <img src="images/1663478263617.jpg" alt="Kenangan bersama Halyza" onclick="openModal('images/1663478263617.jpg', 'First things at PIK')">
+      <img src="images/1672497233445.jpg" alt="Kenangan bersama Halyza" onclick="openModal('images/1672497233445.jpg', 'Double Date Puncak Sama kaka')">
+      <img src="images/IMG_20220804_234943_392.jpg" alt="Kenangan bersama Halyza" onclick="openModal('images/IMG_20220804_234943_392.jpg', 'Ultah Aku Yang Ke 17')">
+      <img src="images/1686463574543.jpg" alt="Kenangan bersama Halyza" onclick="openModal('images/1686463574543.jpg', 'Happy Bakmie')">
+      <img src="images/1660406163913.jpg" alt="Kenangan bersama Halyza" onclick="openModal('images/1660406163913.jpg', 'Mobilan Pertama Ke PIK')">
+      <img src="images/1697945269351.jpg" alt="Kenangan bersama Halyza" onclick="openModal('images/1697945269351.jpg', 'ULtah Kamu Yang ke 18')">
+      <img src="images/1672497704610.jpg" alt="Kenangan bersama Halyza" onclick="openModal('images/1672497704610.jpg', 'Foto Terkeren Kita')">
+      <img src="images/IMG-20220826-WA0039.jpg" alt="Kenangan bersama Halyza" onclick="openModal('images/IMG-20220826-WA0039.jpg', 'Makan Ice Cream Pulang Anter surat')">
+      <img src="images/IMG-20220526-WA0069.jpg" alt="Kenangan bersama Halyza" onclick="openModal('images/IMG-20220526-WA0069.jpg', 'Double Date Sama Rapi-Alya di 15park')">
+      <img src="images/1672497709602.jpg" alt="Kenangan bersama Halyza" onclick="openModal('images/1672497709602.jpg', 'Unforgettanle Moment')">
+      <img src="images/IMG-20220521-WA0000.jpg" alt="Kenangan bersama Halyza" onclick="openModal('images/IMG-20220521-WA0000.jpg', 'Konser Pertama Kita')">
+      <img src="images/IMG_20220813_234804_626.jpg" alt="Kenangan bersama Halyza" onclick="openModal('images/IMG_20220813_234804_626.jpg', 'Gaja di PIK')">
+      <img src="images/1684453980280.jpg" alt="Kenangan bersama Halyza" onclick="openModal('images/1684453980280.jpg', 'Pertama Kali Ke Safari diajak Kamu')">
+      <img src="images/Screenshot_20220904_141113.jpg" alt="Kenangan bersama Halyza" onclick="openModal('images/Screenshot_20220904_141113.jpg', 'Quick Date, Kaget Buka Hijab')">
+      <img src="images/1660408754997.jpg" alt="Kenangan bersama Halyza" onclick="openModal('images/1660408754997.jpg', 'Happiest Moment')">
+      <img src="images/IMG_20220516_022957.jpg" alt="Kenangan bersama Halyza" onclick="openModal('images/IMG_20220516_022957.jpg', 'Discord pertama Kita')">
+    </div>
+  </section>
+
+  <section>
+    <h2>💌 Pesan Dari Hati</h2>
+    <div class="message-box">
+      <p>Hai Halyza, aku buat website ini karena aku kangen kamu. Aku tahu kita punya masa lalu yang luar biasa, dan aku masih sangat mencintaimu. Aku harap kamu bisa melihat ini dan inget semua hal indah yang kita lewati bersama...</p>
+    </div>
+  </section>
+
+  <section>
+    <h2>🕰️ Timeline Kita</h2>
+    <div class="timeline">
+      <div class="timeline-item">
+        <strong>18 Mei 2022</strong> - Hari pertama kita jadian 💖
+      </div>
+      <div class="timeline-item">
+        <strong>21 Mei 2022</strong> - Konser pertama kita 🎶
+      </div>
+      <div class="timeline-item">
+        <strong>26 Mei 2022</strong> - Double Date sama Rapi dan Alya di 15park 🍔
+      </div>
+      <div class="timeline-item">
+        <strong>4 Agustus 2022</strong> - Ultah aku yang ke 17 🎂
+      </div>
+      <div class="timeline-item">
+        <strong>13 Agustus 2022</strong> - Jalan-jalan ke PIK makan Gaja 🐘
+      </div>
+      <div class="timeline-item">
+        <strong>4 September 2022</strong> - Quick date, kamu buka hijab untuk pertama kalinya 😍
+      </div>
+      <div class="timeline-item">
+        <strong>18 Mei 2023</strong> - Anniversary kita yang pertama 🎉
+      </div>
+      <div class="timeline-item">
+        <strong>4 Agustus 2023</strong> - Ultah aku yang ke 18, kamu bikin hari itu spesial banget ❤️
+      </div>
+      <div class="timeline-item">
+        <strong>18 Mei 2024</strong> - Anniversary kita yang kedua, penuh kenangan indah 💕
+      </div>
+      <div class="timeline-item">
+        <strong>4 Agustus 2024</strong> - Ultah aku yang ke 19, kamu selalu ada untukku 🥳
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <i>❤️</i> Dibuat dengan cinta untuk Halyza <i>❤️</i>
+  </footer>
+
+  <!-- Modal untuk gambar -->
+  <div id="imageModal" class="modal">
+    <span class="modal-close" onclick="closeModal()">&times;</span>
+    <div class="modal-content">
+      <img id="modalImage" src="" alt="Gambar besar">
+      <div id="modalCaption" class="modal-caption"></div>
+    </div>
+  </div>
+
+  <script>
+    function openModal(imageSrc, captionText) {
+      const modal = document.getElementById('imageModal');
+      const modalImage = document.getElementById('modalImage');
+      const modalCaption = document.getElementById('modalCaption');
+
+      modal.style.display = 'flex';
+      modalImage.src = imageSrc;
+      modalCaption.textContent = captionText;
+    }
+
+    function closeModal() {
+      const modal = document.getElementById('imageModal');
+      modal.style.display = 'none';
+    }
+
+    // Animasi scroll
+    const sections = document.querySelectorAll('section');
+    window.addEventListener('scroll', () => {
+      sections.forEach(section => {
+        const rect = section.getBoundingClientRect();
+        if (rect.top < window.innerHeight - 100) {
+          section.classList.add('visible');
+        }
+      });
+    });
+
+    // Kontrol audio
+    const bgMusic = document.getElementById('bgMusic');
+    const toggleMusicButton = document.getElementById('toggleMusic');
+
+    function toggleAudio() {
+      if (bgMusic.paused) {
+        bgMusic.play();
+        toggleMusicButton.textContent = '🔊 Matikan Musik';
+      } else {
+        bgMusic.pause();
+        toggleMusicButton.textContent = '🔈 Nyalakan Musik';
+      }
+    }
+
+    const musicPopup = document.getElementById('musicPopup');
+
+    // Tampilkan pop-up setelah animasi penyambut selesai
+    setTimeout(() => {
+      musicPopup.style.display = 'flex';
+    }, 3000); // Waktu sesuai durasi animasi penyambut
+
+    // Fungsi untuk memutar musik
+    function playMusic() {
+      bgMusic.play();
+      musicPopup.style.display = 'none';
+    }
+
+    // Fungsi untuk menutup pop-up tanpa memutar musik
+    function closePopup() {
+      musicPopup.style.display = 'none';
+    }
+  </script>
+</body>
+</html>
